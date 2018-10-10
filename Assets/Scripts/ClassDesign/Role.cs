@@ -12,22 +12,25 @@ public class Role{
 
 	private int force_attack;			//The force attack
 	private int force_defense;			//The force defense
-	private int force_hit;				//The force hit
+	private int force_hit;				//The force hit		[0,100]
 	private float force_critical;		//The max num of Critical force hit
-	private int force_probability;		//The propability of Critical force hit
+	private int force_probability;		//The propability of Critical force hit [0,40]
 	
-	private int magic_attack;			//The magic attack
-	private int magic_defense;			//The magic defense
-	private int magic_hit;				//The magic hit
+	private int magic_attack;			//The magic attack	[0,1000]
+	private int magic_defense;			//The magic defense	[0,1000]
+	private int magic_hit;				//The magic hit		[0,100]
 	private float magic_critical;		//The max num of Critical magic hit
 	private int magic_probability;		//The probability of Critical magic hit
 
 	private int health;					//The max num of life
 	private int magic;					//The max num of magic
 	private int move_speed;				//The move speed
-	private int dodge;					//The dodge
+	private int dodge;					//The dodge			[0,100]
 	private int current_health;			//The current num of life
 	private int current_magic;			//The current num of magic
+
+	public List<Status> role_status;	//The status of the role
+	public List<Skill> role_skills;		//The skills of the role
 
 #region  attributes accessors
 	public string Name
@@ -120,6 +123,10 @@ public class Role{
 	}
 	public int Force_attack
 	{
+		set
+		{
+			force_attack = value;
+		}
 		get
 		{
 			return force_attack;
@@ -127,6 +134,10 @@ public class Role{
 	}
 	public int Force_defense
 	{
+		set
+		{
+			force_defense = value;
+		}
 		get
 		{
 			return force_defense;
@@ -134,6 +145,10 @@ public class Role{
 	}
 	public int Force_hit
 	{
+		set
+		{
+			force_hit = value;
+		}
 		get
 		{
 			return force_hit;
@@ -141,6 +156,10 @@ public class Role{
 	}
 	public float Force_critical
 	{
+		set
+		{
+			force_critical = value;
+		}
 		get
 		{
 			return force_critical;
@@ -148,6 +167,10 @@ public class Role{
 	}
 	public int Force_probability
 	{
+		set
+		{
+			force_probability = value;
+		}
 		get
 		{
 			return force_probability;
@@ -155,6 +178,10 @@ public class Role{
 	}
 	public int Magic_attack
 	{
+		set
+		{
+			magic_attack = value;
+		}
 		get
 		{
 			return magic_attack;
@@ -162,6 +189,10 @@ public class Role{
 	}
 	public int Magic_defense
 	{
+		set
+		{
+			magic_defense = value;
+		}
 		get
 		{
 			return magic_defense;
@@ -169,6 +200,10 @@ public class Role{
 	}
 	public int Magic_hit
 	{
+		set
+		{
+			magic_hit = value;
+		}
 		get
 		{
 			return magic_hit;
@@ -176,6 +211,10 @@ public class Role{
 	}
 	public float Magic_critical
 	{
+		set
+		{
+			magic_critical = value;
+		}
 		get
 		{
 			return magic_critical;
@@ -183,6 +222,10 @@ public class Role{
 	}
 	public int Magic_probability
 	{
+		set
+		{
+			magic_probability = value;
+		}
 		get
 		{
 			return magic_probability;
@@ -197,6 +240,10 @@ public class Role{
 	}
 	public int Magic
 	{
+		set
+		{
+			magic = value;
+		}
 		get
 		{
 			return magic;
@@ -204,6 +251,10 @@ public class Role{
 	}
 	public int Move_speed
 	{
+		set
+		{
+			move_speed = value;
+		}
 		get
 		{
 			return move_speed;
@@ -211,6 +262,10 @@ public class Role{
 	}
 	public int Dodge
 	{
+		set
+		{
+			dodge = value;
+		}
 		get
 		{
 			return dodge;
@@ -265,7 +320,7 @@ public class Role{
 	}
 #endregion
 
-	///<summary>The Default Constructor of Role Class</summary>
+	///<summary>The Constructor of Role Class</summary>
 	///<param name="_name">name</param>
 	///<param name="_sex">sex</param>
 	///<param name="_race">race</param>
@@ -313,66 +368,10 @@ public class Role{
 					current_magic = _current_magic;
 				}
 	#region  need to be modified soon , because there are many problems
-	///<summary>Attack Enemy in Force</summary>
-	///<param name="enemy">The Attack Enemy</param>
-	public void AttackWithForce(Role enemy)
+	public void UseSkill(Role customer,Skill skill)
 	{
-		float tmp = 1.0f;
-		if(CriticalHitHelper(force_probability))
-		{
-			//Critical Hit!
-			tmp = force_critical;
-		}
-		else
-		{
-			tmp = 1.0f;
-		}
-		float damage = force_attack*tmp*(force_hit-enemy.Dodge)/force_hit - enemy.Force_defense;
-		if(damage <= 0)
-		{
-			damage = 1;
-		}
-		enemy.Current_health -= (int)damage;
+		skill.SkillEffect(this,customer);
 	}
-
-	///<summary>Attack Enemy in Magic</summary>
-	///<param name="enemy">The Attack Enemy</param>
-	public void AttackWithMagic(Role enemy)
-	{
-		float tmp = 1.0f;
-		if(CriticalHitHelper(magic_probability))
-		{
-			//Critical Hit!
-			tmp = magic_critical;
-		}
-		else
-		{
-			tmp = 1.0f;
-		}
-		float damage = magic_attack*tmp*(magic_hit-enemy.Dodge)/magic_hit - enemy.Magic_defense;
-		if(damage <= 0)
-		{
-			damage = 1;
-		}
-		enemy.Current_health -= (int)damage;
-	}
-
-	///<summary>Judge whether Critical Hit</summary>
-	///<param name="probability">The ptobility of the attack</param>
-	///<return>true,Critical Hit; False normal Hit</return>
-	private bool CriticalHitHelper(int probability)
-	{
-		int temp = Random.Range(0,100);
-		if(temp < probability)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
 	public void Dead()
 	{
 		Debug.Log("In RoleCalss.cs : "+Name + " is dead.");

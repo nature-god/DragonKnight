@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item{
+public abstract class Item{
 	private string name;		//The Item name
 	private string price;		//The price of the Item, 50% off for sale
 	private string description;	//The description of the item
@@ -54,3 +54,16 @@ public class Item{
 
 	public virtual void UseItem(Role user){}
 }
+
+public abstract class Equipment	: Item
+{
+	public Equipment(string _name,string _price,string _description,int _take_place):base(_name,_price,_description,_take_place)
+	{
+
+	}
+	public virtual void RemoveEquipment(Role user)
+	{
+
+	}
+}
+
