@@ -29,7 +29,7 @@ public class Role{
 	private int current_health;			//The current num of life
 	private int current_magic;			//The current num of magic
 
-	public List<Status> role_status;	//The status of the role
+	public List<status> role_status;	//The status of the role
 	public List<Skill> role_skills;		//The skills of the role
 
 #region  attributes accessors

@@ -12,7 +12,12 @@ public class Player : Role
 	private int gold;								//The player's gold
 
 	public HeadEquipment Head;
+	public ClothEquipment Cloth;
+	public HandGuardEquipment HandGuard;
+	public WeaponEquipment Weapon;
+	public ShoesEquipment Shoes;
 
+	public Pet[] Pets;
 
 	#region new attributes' accessors
 	public int Stamina
@@ -97,6 +102,11 @@ public class Player : Role
 					current_stamina = _current_stamina;
 					reputation = _reputation;
 					gold = _gold;
+					Head = new HeadEquipment();
+					Shoes = new ShoesEquipment();
+					Cloth = new ClothEquipment();
+					Weapon = new WeaponEquipment();
+					HandGuard = new HandGuardEquipment();
 				}
 	
 	///<summary>Show the more information of player</summary>
