@@ -16,6 +16,6 @@ public class ForceAttackStrongerMedical : Item{
 	public override void UseItem(Role user)
 	{
 		ForceAttackStrongerStatus tmp = new ForceAttackStrongerStatus(stronger_num,continus_time);
-		StartCoroutine(tmp.StartStatus(user));
+		GameObject.Find("RoleStatusManager").GetComponent<RoleInGameStatusManager>().StartCoroutine(tmp.StartStatus(user));
 	}
 }

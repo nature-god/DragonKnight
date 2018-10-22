@@ -16,6 +16,6 @@ public class MagicDefenseStrongerMedical : Item {
 	public override void UseItem(Role user)
 	{
 		MagicDefenseStrongerStatus tmp = new MagicDefenseStrongerStatus(stronger_num,continus_time);
-		StartCoroutine(tmp.StartStatus(user));
+		GameObject.Find("RoleStatusManager").GetComponent<RoleInGameStatusManager>().StartCoroutine(tmp.StartStatus(user));
 	}
 }

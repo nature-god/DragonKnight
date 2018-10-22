@@ -17,6 +17,7 @@ public class Player : Role
 	public WeaponEquipment Weapon;
 	public ShoesEquipment Shoes;
 
+	public Package PlayerPackage;
 	public Pet[] Pets;
 
 	#region new attributes' accessors
@@ -107,6 +108,7 @@ public class Player : Role
 					Cloth = new ClothEquipment();
 					Weapon = new WeaponEquipment();
 					HandGuard = new HandGuardEquipment();
+					PlayerPackage = new Package(10);
 				}
 	
 	///<summary>Show the more information of player</summary>
@@ -127,7 +129,7 @@ public class Player : Role
 				+ "Magic_critical: " + Magic_critical + '\n'
 				+ "Magic_probability: " + Magic_probability + '\n'
 				+ "Health: " + Current_health + '/' + Health + '\n' 
-				+ "Magic: " + Current_magic + '\n' + Magic + '\n'
+				+ "Magic: " + Current_magic + '/' + Magic + '\n'
 				+ "Move_speed: " + Move_speed + '\n'
 				+ "Dodge: " + Dodge + '\n'
 				+ "Stamina: " + Current_stamina + '/' + Stamina + '\n'

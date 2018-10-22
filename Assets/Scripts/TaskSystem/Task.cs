@@ -7,16 +7,8 @@ public class Task{
 	private string object_NPC_name;			//The Task NPC Name
 	private string description;				//The Description of the task
 	private bool completed;					//Whether the task is completed
-	private Task next_task;					//The Next task
 	
 	#region accessors
-	public Task Next_task					
-	{
-		get
-		{
-			return next_task;
-		}
-	}
 	public bool Completed
 	{
 		set 
@@ -59,14 +51,34 @@ public class Task{
 		task_name = _task_name;
 		object_NPC_name = _object_NPC_name;
 		description = _description;
-		next_task = new Task();
 		completed = false;
 	}
 	#endregion
+}
 
-	public void SetNextTask(Task _next_task)
+public class Reward
+{
+	private int reward_gold;
+	private List<Item> reward_items;
+	public int Reward_gold
 	{
-		next_task = _next_task;
+		get
+		{
+			return reward_gold;
+		}
+	}
+	public List<Item> Reward_items
+	{
+		get
+		{
+			return reward_items;
+		}
+	}
+
+	public Reward(int _reward_gold,List<Item> _reward_items)
+	{
+		reward_gold = _reward_gold;
+		reward_items = _reward_items;
 	}
 }
 
@@ -80,9 +92,15 @@ public class SmallTask_FindNPCToTalk : Task,ITask
 
 	}
 
-	public void CompleteTask()
+	public void CompleteTask(Player tasker,Reward reward)
 	{
 		Completed = true;
+		tasker.Gold += reward.Reward_gold;
+		foreach (Item item in reward.Reward_items)
+		{
+			tasker.PlayerPackage.AddItem(item);			
+		}
+		//How to handle the situation that the package place is not enough?
 	}
 }
 
@@ -115,8 +133,14 @@ public class SmallTask_GetItemsToNPC : Task,ITask
 	}
 
 
-	public void CompleteTask()
+	public void CompleteTask(Player tasker,Reward reward)
 	{
 		Completed = true;
+		tasker.Gold += reward.Reward_gold;
+		foreach (Item item in reward.Reward_items)
+		{
+			tasker.PlayerPackage.AddItem(item);			
+		}
+		//How to handle the situation that the package place is not enough?
 	}
 }

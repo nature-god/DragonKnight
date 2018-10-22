@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TalkManager : MonoBehaviour {
+public class TalkCanvasManager : MonoBehaviour {
 
 	public static string talkContent;
 	public Text showText;
@@ -20,6 +20,7 @@ public class TalkManager : MonoBehaviour {
 		{
 			if(Input.GetKeyDown(KeyCode.Space))
 			{
+				PlayerManager.Interaction = false;
 				this.gameObject.SetActive(false);
 			}
 		}
@@ -52,6 +53,7 @@ public class TalkManager : MonoBehaviour {
 
 	void OnEnable()
 	{
+		PlayerManager.Interaction = true;
 		showText.text = "";
 		over = false;
 		StartCoroutine(ShowText());

@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Item : MonoBehaviour{
+public abstract class Item {
 	private string item_name;		//The Item name
 	private int price;		//The price of the Item, 50% off for sale
 	private string description;	//The description of the item
@@ -56,6 +56,12 @@ public abstract class Item : MonoBehaviour{
 	}
 
 	public virtual void UseItem(Role user){}
+	public string ItemMessage()
+	{
+		string tmp = "物品名称: "+item_name+"\n";
+		tmp += "描述信息: "+description;
+		return tmp;
+	}
 }
 
 public abstract class Equipment	: Item

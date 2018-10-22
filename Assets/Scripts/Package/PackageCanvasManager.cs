@@ -1,0 +1,152 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class PackageCanvasManager : MonoBehaviour {
+
+	public GameObject ItemPrefab;
+	public Text PackageSpaceText;
+	public Text GoldNumText;
+
+	public Transform ItemsInPackage;
+
+	private Package package;
+	private Transform[] showItems;
+
+
+	private int showStartIndex;
+	private int ShowStartIndex
+	{
+		set
+		{
+			if(showStartIndex >= (package.GetItemsNum()-3))
+			{
+				showStartIndex = package.GetItemsNum()-3;
+			}
+			else if(value <= 0)
+			{
+				showStartIndex = 0;
+			}
+			else
+			{
+				showStartIndex = value;
+			}
+		}
+		get
+		{
+			return showStartIndex;
+		}
+	}
+
+	private int showStartnum;
+	private int ShowStartnum
+	{
+		set
+		{
+			if(package.GetItemsNum()>4 && ShowStartIndex == package.GetItemsNum()-3)
+			{
+				showStartnum = 3;
+			}
+			else if(package.GetItemsNum()>4 && showStartIndex == package.GetItemsNum()-2)
+			{
+				showStartnum = 4;
+			}
+			else if(value >= 5)
+			{
+				showStartnum = 5;
+			}
+			else
+			{
+				showStartnum = value;
+			}
+		}
+		get
+		{
+			return showStartnum;
+		}
+	}
+
+	// Use this for initialization
+	void Awake () {
+		showItems = new Transform[5];
+		showStartIndex = 0;
+	}
+
+	void Update()
+	{
+		if(Input.GetKey(KeyCode.W))
+		{
+			ShowStartnum--;
+			ShowAllItems();
+
+		}
+		else if(Input.GetKey(KeyCode.S))
+		{
+			ShowStartnum++;
+			ShowAllItems();
+		}
+		else if(Input.GetKey(KeyCode.Space))
+		{
+			PlayerManager.Interaction = false;
+			this.gameObject.SetActive(false);
+		}
+	}
+
+	void ShowAllItems()
+	{
+		ClearShow();
+		PresentItems();
+		PackageSpaceText.text = "背包空间: " + package.TakedSpace + "/" + package.MaxSpace;
+		GoldNumText.text = "金币: " + GameManager.Instance.player.Gold;
+	}
+
+	void ClearShow()
+	{
+		int childCount = ItemsInPackage.childCount;
+		for(int i = 0;i<childCount;i++)
+		{
+			Destroy(ItemsInPackage.GetChild(i).gameObject);
+		}
+	}
+
+	//Show 4.5 items
+	void PresentItems()
+	{
+		ShowStartnum = package.GetItemsNum();
+		if(ShowStartnum < 5)
+		{
+			for(int i = 0;i<ShowStartnum;i++)
+			{
+				showItems[i] = Instantiate(ItemPrefab,ItemsInPackage).transform;
+				showItems[i].localPosition = new Vector3(-440.0f,200-150*i,0f);
+
+				showItems[i].GetChild(2).GetComponent<Text>().text = package.items[showStartIndex+i].ItemMessage();
+			}
+
+			showItems[ShowStartnum] = Instantiate(ItemPrefab,ItemsInPackage).transform;
+			showItems[ShowStartnum].localPosition = new Vector3(-440.0f,200-150*(ShowStartnum),0f);
+			showItems[ShowStartnum].GetChild(2).GetComponent<Text>().text = "没有更多的物品啦";
+		}
+		else
+		{
+			showItems[0] = Instantiate(ItemPrefab,ItemsInPackage).transform;
+			showItems[1] = Instantiate(ItemPrefab,ItemsInPackage).transform;
+			showItems[2] = Instantiate(ItemPrefab,ItemsInPackage).transform;
+			showItems[3] = Instantiate(ItemPrefab,ItemsInPackage).transform;
+			showItems[4] = Instantiate(ItemPrefab,ItemsInPackage).transform;
+			for(int i = 0;i<5;i++)
+			{
+				showItems[i].localPosition = new Vector3(-440.0f,200-150*i,0f);
+				showItems[i].GetChild(2).GetComponent<Text>().text = package.items[showStartIndex+i].ItemMessage();
+			}
+		}		
+	}
+
+	void OnEnable()
+	{
+		package = GameManager.Instance.player.PlayerPackage;
+		Debug.Log("Package items' num is :"+package.GetItemsNum());
+		ShowAllItems();
+	}
+}
