@@ -19,6 +19,7 @@ public class NPCTalkManager : MonoBehaviour {
 		{
 			TalkCanvasManager.talkContent = roleLines;
 			GameObject.Find("World").transform.Find("TalkCanvas").gameObject.SetActive(true);
+			PlayerManager.Interaction = true;			
 		}	
 	}
 }

@@ -20,7 +20,7 @@ public class HitDizzy : SpecialMagicSkill {
 			if(SpecialMagicHitHelper(user,customer))
 			{
 				DizzyStatus bloodDropping = new DizzyStatus(duration);
-				StartCoroutine(bloodDropping.StartStatus(customer));
+				GameObject.Find("RoleStatusManager").GetComponent<RoleInGameStatusManager>().StartCoroutine(bloodDropping.StartStatus(customer));
 			}
 		}
 	}

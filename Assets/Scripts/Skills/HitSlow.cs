@@ -22,7 +22,7 @@ public class HitSlow : SpecialMagicSkill {
 			if(SpecialMagicHitHelper(user,customer))
 			{
 				SlowStatus bloodDropping = new SlowStatus(slow_num,duration);
-				StartCoroutine(bloodDropping.StartStatus(customer));
+				GameObject.Find("RoleStatusManager").GetComponent<RoleInGameStatusManager>().StartCoroutine(bloodDropping.StartStatus(customer));
 			}
 		}
 	}

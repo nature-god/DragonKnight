@@ -24,7 +24,7 @@ public class HitLosingBlood : SpecialMagicSkill {
 			if(SpecialMagicHitHelper(user,customer))
 			{
 				BloodDroppingStatus bloodDropping = new BloodDroppingStatus(losingNumPerTime,duration);
-				StartCoroutine(bloodDropping.StartStatus(customer));
+				GameObject.Find("RoleStatusManager").GetComponent<RoleInGameStatusManager>().StartCoroutine(bloodDropping.StartStatus(customer));
 			}
 		}
 	}

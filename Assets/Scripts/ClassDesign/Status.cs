@@ -15,7 +15,9 @@ public enum status
 	ForceHitStronger = 5,
 	MagicAttackStronger = 6,
 	MagicDefenseStronger = 7,
-	MagicHitStronger = 8
+	MagicHitStronger = 8,
+	BloodAdding = 9,
+	MagicAdding = 10
 };
 
 public class Status
@@ -124,6 +126,48 @@ public class BloodDroppingStatus : Status,IStatus
 			customer.Current_health -= losingNumPerTime;
 		}
 		customer.role_status.Remove(status.BloodDropping);
+	}
+}
+
+public class BloodAddingStatus : Status,IStatus
+{
+	private int addingNumPerTime;		//The losing num per time
+
+	public BloodAddingStatus(int _addingNumPerTime,int _continuous_time):base(_continuous_time)
+	{
+		addingNumPerTime = _addingNumPerTime;
+	}
+
+	public IEnumerator StartStatus(Role customer) 
+	{
+		customer.role_status.Add(status.BloodAdding);
+		for(int tmp = 1;tmp <= continuous_time;tmp++)
+		{
+			yield return new WaitForSeconds(1.0f);
+			customer.Current_health += addingNumPerTime;
+		}
+		customer.role_status.Remove(status.BloodAdding);
+	}
+}
+
+public class MagicAddingStatus : Status,IStatus
+{
+	private int addingNumPerTime;		//The losing num per time
+
+	public MagicAddingStatus(int _addingNumPerTime,int _continuous_time):base(_continuous_time)
+	{
+		addingNumPerTime = _addingNumPerTime;
+	}
+
+	public IEnumerator StartStatus(Role customer) 
+	{
+		customer.role_status.Add(status.MagicAdding);
+		for(int tmp = 1;tmp <= continuous_time;tmp++)
+		{
+			yield return new WaitForSeconds(1.0f);
+			customer.Current_magic += addingNumPerTime;
+		}
+		customer.role_status.Remove(status.MagicAdding);
 	}
 }
 

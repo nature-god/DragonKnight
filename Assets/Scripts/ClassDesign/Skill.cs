@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Skill : MonoBehaviour{
+public abstract class Skill{
 	private string skill_name;		//Skill Name
 	private int cooling_time;		//The time for the next use
 	private string description;		//The description of the skills

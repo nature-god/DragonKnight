@@ -28,7 +28,7 @@ public class GameManager {
 							10,10,10,1,0,
 							15,5,5,1,0,
 							100,20,5,5,100,20,
-							100,100,0,20);
+							100,100,0,20000);
 	}
 
 	public static void Show()

@@ -366,6 +366,7 @@ public class Role{
 					dodge = _dodge;
 					current_health = _current_health;
 					current_magic = _current_magic;
+					role_status = new List<status>();
 				}
 	#region  need to be modified soon , because there are many problems
 	public void UseSkill(Role customer,Skill skill)

@@ -13,23 +13,60 @@ public class PackageCanvasManager : MonoBehaviour {
 
 	private Package package;
 	private Transform[] showItems;
-
+ 
+	private int chooseIndex;
+	private int ChooseIndex
+	{
+		set
+		{
+			if(value < 0)
+			{
+				ShowStartIndex--;
+				chooseIndex = 0;
+			}
+			else if(value >= package.GetItemsNum())
+			{
+				ShowStartIndex++;
+				chooseIndex = package.GetItemsNum()-1;
+			}
+			else if(value > 3)
+			{
+				ShowStartIndex++;
+				chooseIndex = 3;
+			}
+			else
+			{
+				chooseIndex = value;
+			}
+		}
+		get
+		{	
+			return chooseIndex;
+		}
+	}
 
 	private int showStartIndex;
 	private int ShowStartIndex
 	{
 		set
 		{
-			if(showStartIndex >= (package.GetItemsNum()-3))
+			if( value > (package.GetItemsNum() - 4))
 			{
-				showStartIndex = package.GetItemsNum()-3;
+				//The last Page
+				ShowStartIndex = package.GetItemsNum() - 4;
 			}
-			else if(value <= 0)
+			else if(value > package.GetItemsNum())
 			{
+				showStartIndex = 0;
+			}
+			else if(value < 0)
+			{
+				//The First Page
 				showStartIndex = 0;
 			}
 			else
 			{
+				//other Page
 				showStartIndex = value;
 			}
 		}
@@ -44,11 +81,7 @@ public class PackageCanvasManager : MonoBehaviour {
 	{
 		set
 		{
-			if(package.GetItemsNum()>4 && ShowStartIndex == package.GetItemsNum()-3)
-			{
-				showStartnum = 3;
-			}
-			else if(package.GetItemsNum()>4 && showStartIndex == package.GetItemsNum()-2)
+			if(package.GetItemsNum() >= 5 && ShowStartIndex == package.GetItemsNum() - 4)
 			{
 				showStartnum = 4;
 			}
@@ -71,25 +104,37 @@ public class PackageCanvasManager : MonoBehaviour {
 	void Awake () {
 		showItems = new Transform[5];
 		showStartIndex = 0;
+		chooseIndex = 0;
 	}
 
 	void Update()
 	{
-		if(Input.GetKey(KeyCode.W))
+		if(Input.GetKeyDown(KeyCode.W))
 		{
-			ShowStartnum--;
+			ChooseIndex--;
 			ShowAllItems();
 
 		}
-		else if(Input.GetKey(KeyCode.S))
+		else if(Input.GetKeyDown(KeyCode.S))
 		{
-			ShowStartnum++;
+			ChooseIndex++;
 			ShowAllItems();
 		}
-		else if(Input.GetKey(KeyCode.Space))
+		else if(Input.GetKeyDown(KeyCode.Space))
 		{
 			PlayerManager.Interaction = false;
 			this.gameObject.SetActive(false);
+		}
+		else if(Input.GetKeyDown(KeyCode.J))
+		{
+			//Use Item
+			Item tmp = package.items[ChooseIndex+ShowStartIndex];
+
+			tmp.UseItem(GameManager.Instance.player);
+			package.RemoveItem(tmp);
+			showStartIndex = 0;
+			chooseIndex = 0;
+			ShowAllItems();
 		}
 	}
 
@@ -122,11 +167,15 @@ public class PackageCanvasManager : MonoBehaviour {
 				showItems[i].localPosition = new Vector3(-440.0f,200-150*i,0f);
 
 				showItems[i].GetChild(2).GetComponent<Text>().text = package.items[showStartIndex+i].ItemMessage();
+				showItems[i].GetChild(0).GetComponent<Image>().color = new Color(84.0f/255.0f,84.0f/255.0f,84.0f/255.0f);		
+
 			}
 
 			showItems[ShowStartnum] = Instantiate(ItemPrefab,ItemsInPackage).transform;
 			showItems[ShowStartnum].localPosition = new Vector3(-440.0f,200-150*(ShowStartnum),0f);
 			showItems[ShowStartnum].GetChild(2).GetComponent<Text>().text = "没有更多的物品啦";
+			showItems[ShowStartnum].GetChild(0).GetComponent<Image>().color = new Color(84.0f/255.0f,84.0f/255.0f,84.0f/255.0f);		
+
 		}
 		else
 		{
@@ -139,12 +188,17 @@ public class PackageCanvasManager : MonoBehaviour {
 			{
 				showItems[i].localPosition = new Vector3(-440.0f,200-150*i,0f);
 				showItems[i].GetChild(2).GetComponent<Text>().text = package.items[showStartIndex+i].ItemMessage();
+				showItems[i].GetChild(0).GetComponent<Image>().color = new Color(84.0f/255.0f,84.0f/255.0f,84.0f/255.0f);		
+
 			}
-		}		
+		}	
+		showItems[ChooseIndex].GetChild(0).GetComponent<Image>().color = new Color(200.0f/255.0f,90.0f/255.0f,90.0f/255.0f);		
 	}
 
 	void OnEnable()
 	{
+		showStartIndex = 0;
+		chooseIndex = 0;
 		package = GameManager.Instance.player.PlayerPackage;
 		Debug.Log("Package items' num is :"+package.GetItemsNum());
 		ShowAllItems();
