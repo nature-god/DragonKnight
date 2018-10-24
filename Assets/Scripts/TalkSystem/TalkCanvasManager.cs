@@ -33,7 +33,6 @@ public class TalkCanvasManager : MonoBehaviour {
 				showText.text = talkContent;
 			}	
 		}
-		
 	}
 
 	IEnumerator ShowText()

@@ -19,7 +19,11 @@ public class PackageCanvasManager : MonoBehaviour {
 	{
 		set
 		{
-			if(value < 0)
+			if(package.GetItemsNum() == 0)
+			{
+				chooseIndex = 0;
+			}
+			else if(value < 0)
 			{
 				ShowStartIndex--;
 				chooseIndex = 0;
@@ -127,6 +131,8 @@ public class PackageCanvasManager : MonoBehaviour {
 		}
 		else if(Input.GetKeyDown(KeyCode.J))
 		{
+			if(package.GetItemsNum() == 0)
+				return;
 			//Use Item
 			Item tmp = package.items[ChooseIndex+ShowStartIndex];
 

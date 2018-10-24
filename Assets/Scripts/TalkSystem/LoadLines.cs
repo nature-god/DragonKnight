@@ -21,5 +21,4 @@ public class LoadLines {
 		XmlNode node = xmlDoc.SelectSingleNode("lines");
 		return node.InnerXml;
 	}
-
 }
