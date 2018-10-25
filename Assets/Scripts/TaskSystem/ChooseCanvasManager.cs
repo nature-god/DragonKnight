@@ -13,7 +13,7 @@ public class ChooseCanvasManager : MonoBehaviour {
 	public Text DefaultSentense;
 
 	public static string DefaultLines;
-	public GameObject specialRole;
+	public SpecialNPCTalkManager specialRole;
 	private int chooseIndex;
 	private int ChooseIndex
 	{
@@ -62,6 +62,8 @@ public class ChooseCanvasManager : MonoBehaviour {
 		else if(Input.GetKeyDown(KeyCode.J))
 		{
 			//specialRole.xxxx
+			specialRole.Choose(ChooseIndex);
+			this.gameObject.SetActive(false);			
 		}
 	}
 

@@ -34,6 +34,10 @@ public class Player : Role
 	}
 	public int Current_stamina
 	{
+		set
+		{
+			current_stamina = value;
+		}
 		get
 		{
 			return current_stamina;
@@ -41,6 +45,10 @@ public class Player : Role
 	}
 	public int Reputation
 	{
+		set
+		{
+			reputation = value;
+		}
 		get
 		{
 			return reputation;
@@ -135,5 +143,105 @@ public class Player : Role
 				+ "Stamina: " + Current_stamina + '/' + Stamina + '\n'
 				+ "Reputation: " + Reputation + '\n'
 				+ "Gold" + Gold);
+	}
+
+	public bool LevelEvaluation()
+	{
+		switch (GetLevel())
+		{
+			//菜鸟级=>新手级
+			case 0:
+			{
+				if(AdventureBook.Instance.GetNumWithKey("Rookie_Level")>=5&&Reputation>=100)
+				{
+					SetLevel(GetLevel()+1);
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			//新手级=>冒险家级
+			case 1:
+			{
+				if((AdventureBook.Instance.GetNumWithKey("Rookie_Level")>=20&&AdventureBook.Instance.GetNumWithKey("Adventurer_Level")>=1&&Reputation>=500))
+				{
+					SetLevel(GetLevel()+1);
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			//冒险家级=>大师级
+			case 2:
+			{
+				if(AdventureBook.Instance.GetNumWithKey("Adventurer_Level")>=20&&AdventureBook.Instance.GetNumWithKey("Master_Level")>=1&&Reputation>=1000)
+				{
+					SetLevel(GetLevel()+1);
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			//大师级=>传奇级
+			case 3:
+			{
+				if(AdventureBook.Instance.GetNumWithKey("Master_Level")>=20&&AdventureBook.Instance.GetNumWithKey("Legend_Level")>=1&&Reputation>=2000)
+				{
+					SetLevel(GetLevel()+1);
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			//传奇级=>圣域级
+			case 4:
+			{
+				if(AdventureBook.Instance.GetNumWithKey("Legend_Level")>=10&&AdventureBook.Instance.GetNumWithKey("HolyField_Level")>=1&&Reputation>=5000)
+				{
+					SetLevel(GetLevel()+1);
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			//圣域级=>星空级
+			case 5:
+			{
+				if(AdventureBook.Instance.GetNumWithKey("HolyField_Level")>=10&&AdventureBook.Instance.GetNumWithKey("Star_Level")>=1&&Reputation>=10000)
+				{
+					SetLevel(GetLevel()+1);
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			case 6:
+			{
+				if(Reputation>=20000)
+				{
+					return true;
+				}
+				else
+				{
+					return false;					
+				}
+			}
+			default:
+			{
+				return false;
+			}
+		}
 	}
 }

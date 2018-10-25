@@ -377,5 +377,13 @@ public class Role{
 	{
 		Debug.Log("In RoleCalss.cs : "+Name + " is dead.");
 	}
+	public void SetLevel(int num)
+	{
+		level = num;
+	}
+	public int GetLevel()
+	{
+		return level;
+	}
 	#endregion	
 }
