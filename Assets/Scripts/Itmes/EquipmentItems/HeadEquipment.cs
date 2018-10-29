@@ -17,14 +17,26 @@ public class HeadEquipment : Equipment
 
 	public override void UseItem(Role role)
 	{
-		((Player)role).Head = this;
-		role.Force_defense += force_defense_strengthen;
-		role.Magic_defense += magic_defense_strengthen;
+		if(((Player)role).Head.Name == "无")
+		{
+			((Player)role).Head = this;
+			role.Force_defense += force_defense_strengthen;
+			role.Magic_defense += magic_defense_strengthen;
+		}
+		else
+		{
+			((Player)role).Head.RemoveEquipment(role);
+			((Player)role).Head = this;
+			role.Force_defense += force_defense_strengthen;
+			role.Magic_defense += magic_defense_strengthen;
+		}
+
 	}
 	public override void RemoveEquipment(Role role)
 	{
-		((Player)role).Head = null;
 		role.Force_defense -= force_defense_strengthen;
 		role.Magic_defense -= magic_defense_strengthen;
+		((Player)role).PlayerPackage.AddItem(((Player)role).Head);
+		((Player)role).Head = null;
 	}
 }

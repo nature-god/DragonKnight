@@ -16,14 +16,25 @@ public class ShoesEquipment : Equipment {
 
 	public override void UseItem(Role role)
 	{
-		((Player)role).Shoes = this;
-		role.Move_speed += move_speed_strengthen;
-		role.Dodge += dodge_strengthen;
+		if(((Player)role).Shoes.Name == "无")
+		{
+			((Player)role).Shoes = this;
+			role.Move_speed += move_speed_strengthen;
+			role.Dodge += dodge_strengthen;
+		}
+		else
+		{
+			((Player)role).Shoes.RemoveEquipment(role);
+			((Player)role).Shoes = this;
+			role.Move_speed += move_speed_strengthen;
+			role.Dodge += dodge_strengthen;
+		}
 	}
 	public override void RemoveEquipment(Role role)
 	{
-		((Player)role).Shoes = null;
 		role.Move_speed -= move_speed_strengthen;
 		role.Dodge -= dodge_strengthen;
+		((Player)role).PlayerPackage.AddItem(((Player)role).Shoes);
+		((Player)role).Shoes = null;
 	}
 }

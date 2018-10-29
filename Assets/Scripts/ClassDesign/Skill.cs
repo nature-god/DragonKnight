@@ -97,6 +97,7 @@ public abstract class Skill{
 	}
 }
 
+//ForceSkill
 public abstract class ForceSkill : Skill
 {
 	private int extra_attack;		//The extra attack

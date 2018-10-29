@@ -9,33 +9,72 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1379039880101266}
+  m_RootGameObject: {fileID: 1011642561933508}
   m_IsPrefabAsset: 1
---- !u!1 &1379039880101266
+--- !u!1 &1011642561933508
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 224156562055396446}
-  - component: {fileID: 222567478013455860}
-  - component: {fileID: 114315716327831654}
-  - component: {fileID: 114897823367325708}
-  - component: {fileID: 114661072463962822}
+  - component: {fileID: 224083825292432122}
+  - component: {fileID: 222738892171138270}
+  - component: {fileID: 114986747873073678}
+  - component: {fileID: 114449135050553332}
+  - component: {fileID: 114776158509351534}
   m_Layer: 5
-  m_Name: StongerItem_ForceHitStronger
+  m_Name: Equipment_HandGuard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114315716327831654
+--- !u!114 &114449135050553332
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1379039880101266}
+  m_GameObject: {fileID: 1011642561933508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 532018f46e321e64688f236474699a11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemManagerType: 2
+  strongerItemManager: {fileID: 0}
+  resumeItemManager: {fileID: 0}
+  equipmentManager: {fileID: 0}
+--- !u!114 &114776158509351534
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1011642561933508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05bc006bb9649f2448879bb61ae9c162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemType: 1
+  ItemName: "\u7CBE\u81F4\u62A4\u624B"
+  ItemPrice: 500
+  ItemTakePlace: 5
+  Force_attack_strengthen: 0
+  Force_defense_strengthen: 20
+  Force_hit_strengthen: 5
+  Magic_attack_strengthen: 5
+  Magic_defense_strengthen: 0
+  Magic_hit_strengthen: 2
+  Move_speed_strengthen: 0
+  Dodge_strengthen: 0
+  ItemDescription: "\u6BD4\u8F83\u7CBE\u81F4\u7684\u62A4\u624B\uFF0C\u53EF\u4EE5\u589E\u52A0\u547D\u4E2D\u7B49\u7EA7"
+--- !u!114 &114986747873073678
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1011642561933508}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -57,52 +96,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114661072463962822
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1379039880101266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f87ff68ee8f233e40b7eaee529f877ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ItemType: 2
-  MedicalName: "\u5F31\u6548\u547D\u4E2D\u836F\u5242"
-  MedicalPrice: 200
-  MedicalSpcaeTake: 1
-  MedicalStrongerNum: 5
-  MedicalContinusTime: 30
-  MedicalDescription: "\u5F3A\u5316\u7269\u7406\u547D\u4E2D\u4E00\u822C\u836F\u5242"
---- !u!114 &114897823367325708
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1379039880101266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 532018f46e321e64688f236474699a11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemManagerType: 0
-  strongerItemManager: {fileID: 0}
-  resumeItemManager: {fileID: 0}
-  equipmentManager: {fileID: 0}
---- !u!222 &222567478013455860
+--- !u!222 &222738892171138270
 CanvasRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1379039880101266}
+  m_GameObject: {fileID: 1011642561933508}
   m_CullTransparentMesh: 0
---- !u!224 &224156562055396446
+--- !u!224 &224083825292432122
 RectTransform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1379039880101266}
+  m_GameObject: {fileID: 1011642561933508}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}

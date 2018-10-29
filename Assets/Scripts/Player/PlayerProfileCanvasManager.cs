@@ -31,7 +31,12 @@ public class PlayerProfileCanvasManager : MonoBehaviour {
 								+ "法术容量: " + player.Current_magic + '/' + player.Magic + '\n'
 								+ "移动速度: " + player.Move_speed + '\n'
 								+ "闪避: " + player.Dodge + '\n'
-								+ "声望: " + player.Reputation;
+								+ "声望: " + player.Reputation + '\n'
+								+ "头部装备: " + player.Head.Name + '\n'
+								+ "护手装备: " + player.HandGuard.Name + '\n'
+								+ "身体装备: " + player.Cloth.Name + '\n'
+								+ "武器装备: " + player.Weapon.Name + '\n'
+								+ "鞋子装备: " + player.Shoes.Name;
 
 		ForceInformationText.text = "物攻: " + player.Force_attack + '\n'
 								+ "物防: " + player.Force_defense + '\n'

@@ -20,6 +20,7 @@ public class Player : Role
 	public Package PlayerPackage;
 	public Pet[] Pets;
 
+	public NumChangeDelegate OnStaminaChange;
 	#region new attributes' accessors
 	public int Stamina
 	{
@@ -36,7 +37,19 @@ public class Player : Role
 	{
 		set
 		{
-			current_stamina = value;
+			if(value <= 0)
+			{
+				current_stamina = 0;
+			}
+			else if(value >= Stamina)
+			{
+				current_stamina = Stamina;
+			}
+			else
+			{
+				current_stamina = value;
+			}
+			OnStaminaChange(current_stamina,Stamina);
 		}
 		get
 		{

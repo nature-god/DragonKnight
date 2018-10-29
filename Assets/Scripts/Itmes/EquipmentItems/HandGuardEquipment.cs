@@ -16,14 +16,26 @@ public class HandGuardEquipment : Equipment {
 
 	public override void UseItem(Role role)
 	{
-		((Player)role).HandGuard = this;
-		role.Force_hit += force_hit_strengthen;
-		role.Magic_hit += magic_hit_strengthen;
+		if(((Player)role).HandGuard.Name == "无")
+		{
+			((Player)role).HandGuard = this;
+			role.Force_hit += force_hit_strengthen;
+			role.Magic_hit += magic_hit_strengthen;
+		}
+		else
+		{
+			((Player)role).HandGuard.RemoveEquipment(role);
+			((Player)role).HandGuard = this;
+			role.Force_hit += force_hit_strengthen;
+			role.Magic_hit += magic_hit_strengthen;
+		}
+
 	}
 	public override void RemoveEquipment(Role role)
 	{
-		((Player)role).HandGuard = null;
 		role.Force_hit -= force_hit_strengthen;
 		role.Magic_hit -= magic_hit_strengthen;
+		((Player)role).PlayerPackage.AddItem(((Player)role).HandGuard);
+		((Player)role).HandGuard = null;
 	}
 }

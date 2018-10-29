@@ -16,14 +16,25 @@ public class WeaponEquipment : Equipment {
 
 	public override void UseItem(Role role)
 	{
-		((Player)role).Weapon = this;
-		role.Force_attack += force_attack_strengthen;
-		role.Magic_attack += magic_attack_strengthen;
+		if(((Player)role).Weapon.Name == "无")
+		{
+			((Player)role).Weapon = this;
+			role.Force_attack += force_attack_strengthen;
+			role.Magic_attack += magic_attack_strengthen;
+		}
+		else
+		{
+			((Player)role).Weapon.RemoveEquipment(role);
+			((Player)role).Weapon = this;
+			role.Force_attack += force_attack_strengthen;
+			role.Magic_attack += magic_attack_strengthen;
+		}
 	}
 	public override void RemoveEquipment(Role role)
 	{
-		((Player)role).Weapon = null;
 		role.Force_attack -= force_attack_strengthen;
 		role.Magic_attack -= magic_attack_strengthen;
+		((Player)role).PlayerPackage.AddItem(((Player)role).Weapon);
+		((Player)role).Weapon = null;
 	}
 }

@@ -14,7 +14,14 @@ public abstract class Item {
 	{
 		get
 		{
-			return item_name;
+			if(item_name == null)
+			{
+				return "无";
+			}
+			else
+			{
+				return item_name;				
+			}
 		}
 	}
 	public int Price

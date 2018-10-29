@@ -32,6 +32,10 @@ public class Role{
 	public List<status> role_status;	//The status of the role
 	public List<Skill> role_skills;		//The skills of the role
 
+	public delegate void NumChangeDelegate(int current_num,int max_num);
+	public NumChangeDelegate OnHealthChange; 
+	public NumChangeDelegate OnMagicChange;
+
 #region  attributes accessors
 	public string Name
 	{
@@ -290,6 +294,7 @@ public class Role{
 			{
 				current_health = value;
 			}
+			OnHealthChange(current_health,Health);
 		}
 		get
 		{
@@ -312,6 +317,7 @@ public class Role{
 			{
 				current_magic = value;
 			}
+			OnMagicChange(current_magic,Magic);
 		}
 		get
 		{
