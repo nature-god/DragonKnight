@@ -11,9 +11,9 @@ public class Golblin : Role {
 				:base(_name,_gender,_race,_level,_force_attack,_force_defense,_force_hit,_force_critical,_force_probability,_magic_attack,
 				_magic_defense,_magic_hit,_magic_critical,_magic_probability,_health,_magic,_move_speed,_dodge,_current_health,_current_magic)
 				{
-					ClawHit clawHit = new ClawHit("爪击",2,0,"使用锋利的爪子进行攻击",1);
-					ResumeSelf resumeSelf = new ResumeSelf("回复术",10,5,5,"简单的回复技巧");
-					this.role_skills.Add(clawHit);
-					this.role_skills.Add(resumeSelf);
+					//ClawHit clawHit = new ClawHit("爪击",2,0,"使用锋利的爪子进行攻击",1);
+					//ResumeSelf resumeSelf = new ResumeSelf("回复术",10,5,5,"简单的回复技巧");
+					//this.role_skills.Add(clawHit);
+					//this.role_skills.Add(resumeSelf);
 				}
 }
