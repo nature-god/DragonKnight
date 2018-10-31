@@ -27,7 +27,7 @@ public class GameManager {
 		player = new Player("nature",0,"Human",1,
 							10,10,10,1,0,
 							15,5,5,1,0,
-							100,20,5,5,60,0,
+							100,20,20,5,60,0,
 							100,100,0,20000);
 	}
 

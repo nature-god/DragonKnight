@@ -33,7 +33,7 @@ public class Package{
 	{
 		maxSpace = _place;
 		items = new List<Item>();
-
+		/* 
 		FastHealthResumeMedical tmp1 = new FastHealthResumeMedical("Golblin_Teeth",50,"测试用丹药",1,10);
 		FastHealthResumeMedical tmp2 = new FastHealthResumeMedical("Golblin_Teeth",50,"测试用丹药",1,10);
 		FastHealthResumeMedical tmp3 = new FastHealthResumeMedical("Golblin_Teeth",50,"测试用丹药",1,10);
@@ -53,7 +53,7 @@ public class Package{
 		AddItem(tmp7);
 		AddItem(tmp8);
 		AddItem(tmp9);
-
+		*/
 
 
 	}

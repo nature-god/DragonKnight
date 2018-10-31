@@ -13,13 +13,6 @@ public class AttackRangeManager : MonoBehaviour {
 	{
 		if(tmp.gameObject.CompareTag("Player"))
 		{
-			monsterManager._MonsterStatus = MonsterManager.MonsterStatus.Normal;
-		}
-	}
-	void OnTriggerExit2D(Collider2D tmp)
-	{
-		if(tmp.gameObject.CompareTag("Player"))
-		{
 			monsterManager._MonsterStatus = MonsterManager.MonsterStatus.Attack;
 		}
 	}
