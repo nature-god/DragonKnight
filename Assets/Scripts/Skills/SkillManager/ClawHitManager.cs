@@ -11,7 +11,6 @@ public class ClawHitManager : SkillManager {
 	public string Description;
 
 	public ClawHit ClawHit_Skill;
-
 	private Role User;
 	
 	// Use this for initialization

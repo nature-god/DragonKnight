@@ -32,6 +32,9 @@ public class Role{
 	public List<status> role_status;	//The status of the role
 	public List<Skill> role_skills;		//The skills of the role
 
+	public delegate void DeadDelegate();
+	public DeadDelegate Dead;
+
 	public delegate void NumChangeDelegate(int current_num,int max_num);
 	public NumChangeDelegate OnHealthChange; 
 	public NumChangeDelegate OnMagicChange;
@@ -378,10 +381,6 @@ public class Role{
 	public void UseSkill(Role customer,Skill skill)
 	{
 		skill.SkillEffect(this,customer);
-	}
-	public void Dead()
-	{
-		Debug.Log("In RoleCalss.cs : "+Name + " is dead.");
 	}
 	public void SetLevel(int num)
 	{

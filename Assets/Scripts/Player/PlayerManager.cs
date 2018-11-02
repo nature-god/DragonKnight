@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour {
 	public GameObject PlayerProfileCanvas;	
 	public Animator anim;
 
+	public PlayerUICanvasManager playerUICanvas;
 	// Use this for initialization
 	void Start () {
 		player = GameManager.Instance.player;
@@ -52,6 +53,14 @@ public class PlayerManager : MonoBehaviour {
 			{
 				PlayerProfileCanvas.SetActive(true);
 				Interaction = true;
+			}
+			else if(Input.GetKeyDown(KeyCode.M))
+			{
+				if(!playerUICanvas.PlayerAllSkills[0].isCooling)
+				{
+					Interaction = true;
+					playerUICanvas.PlayerAllSkills[0].UseSkill();
+				}
 			}
 		}
 	}

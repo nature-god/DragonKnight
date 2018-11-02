@@ -17,6 +17,8 @@ public class GolbinManager : MonsterManager {
 		}
 		Monster.OnHealthChange = OnHealthChange;
 		Monster.OnMagicChange =OnMagicChange;
+		Monster.Dead = DropItem;
+		Monster.Dead += MonsterDead;
 		OnHealthChange(Monster.Current_health,Health);
 		OnMagicChange(Monster.Current_magic,Magic);
 	}

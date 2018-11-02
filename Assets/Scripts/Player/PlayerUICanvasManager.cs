@@ -8,8 +8,17 @@ public class PlayerUICanvasManager : MonoBehaviour {
 	public Slider HealthSlider;
 	public Slider MagicSlider;
 	public Slider StaminaSlider;
+	public Transform PlayerSkills;
+	public SkillIconManager[] PlayerAllSkills;
 	// Use this for initialization
 	void Awake () {
+		PlayerAllSkills = new SkillIconManager[PlayerSkills.childCount];
+		for(int i = 0;i<PlayerSkills.childCount;i++)
+		{
+			PlayerAllSkills[i] = PlayerSkills.GetChild(i).transform.GetComponent<SkillIconManager>();
+			PlayerAllSkills[i].CoolingImage = this.transform.GetChild(0).GetChild(i).GetChild(0).GetComponent<Image>();
+			this.transform.GetChild(0).GetChild(i).GetComponent<Image>().sprite = PlayerAllSkills[i].SkillIcon;
+		}
 		Player player = GameManager.Instance.player;
 		player.OnHealthChange = OnHealthNumChange;
 		player.OnMagicChange = OnMagicNumChange;

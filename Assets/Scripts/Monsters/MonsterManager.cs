@@ -42,10 +42,13 @@ public class MonsterManager : MonoBehaviour {
 	public BoxCollider2D AttackRange;
 	public Animator Anim;
 
+	public GameObject DropItemPrefab;
+	private Transform WorldItems;
 	private Vector3 lastFramePos;
 	void Awake()
 	{
 		lastFramePos = this.transform.position;
+		WorldItems = GameObject.Find("World").transform.Find("MainSceneCanvas/Items").transform;
 	}
 
 	void Update () {
@@ -136,25 +139,13 @@ public class MonsterManager : MonoBehaviour {
 
 	private void SetAnimation(Vector3 previousFram)
 	{
-		if(this.transform.position.x - previousFram.x > 0.0f)
+		if(Mathf.Abs(this.transform.position.x-previousFram.x)>Mathf.Abs(this.transform.position.y-previousFram.y))
 		{
-			if(this.transform.position.y - previousFram.y > 0.0f)
-			{
-				Anim.SetFloat("Vertical",0.0f);
-				Anim.SetFloat("Horizontal",1.0f);
-			}
-			else
+			//Vertical Move
+			if(this.transform.position.x - previousFram.x > 0.0f)
 			{
 				Anim.SetFloat("Vertical",1.0f);
 				Anim.SetFloat("Horizontal",0.0f);
-			}
-		}
-		else
-		{
-			if(this.transform.position.y - previousFram.y > 0.0f)
-			{
-				Anim.SetFloat("Vertical",0.0f);
-				Anim.SetFloat("Horizontal",-1.0f);
 			}
 			else
 			{
@@ -162,5 +153,38 @@ public class MonsterManager : MonoBehaviour {
 				Anim.SetFloat("Horizontal",0.0f);
 			}
 		}
+		else
+		{
+			//Horizontal Move
+			if(this.transform.position.y - previousFram.y > 0.0f)
+			{
+				Anim.SetFloat("Vertical",0.0f);
+				Anim.SetFloat("Horizontal",1.0f);
+			}
+			else
+			{
+				Anim.SetFloat("Vertical",0.0f);
+				Anim.SetFloat("Horizontal",-1.0f);
+			}
+		}
+	}
+
+	public void DropItem()
+	{
+		int Tmp = this.transform.GetChild(3).childCount;
+		int DropNum = Random.Range(0,Tmp+2);
+		int DropItemType = Random.Range(0,Tmp);
+		Debug.Log("Tmp:"+Tmp+"DropNum:"+DropNum+"DropItemType:"+DropItemType);
+		for(int i = 0;i<DropNum;i++)
+		{
+			GameObject s = Instantiate(DropItemPrefab,WorldItems);
+			s.transform.position = new Vector3(this.transform.position.x + 10*(i+1),this.transform.position.y+10*(i+1),0);
+			s.transform.GetComponent<DropItemManager>().item = this.transform.GetChild(3).GetChild(DropItemType).GetComponent<NormalItemManager>().normalItem;
+		}
+	}
+
+	public void MonsterDead()
+	{
+		GameObject.Destroy(this.gameObject);
 	}
 }
